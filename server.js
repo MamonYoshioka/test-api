@@ -4,6 +4,7 @@ import recipes from "./data/recipes.js"
 const app = express();
 app.use(express.json());
 
+const PORT = process.env.PORT || 3000;
 
 //secure
 const checkAuth = (req, res, next) => {
