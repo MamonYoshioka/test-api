@@ -4,9 +4,6 @@ const app = express();
 app.use(express.json());
 
 
-
-
-
 // 動作確認
 app.get("/", (req, res)=>{
   res.json({message: "Running API"})
