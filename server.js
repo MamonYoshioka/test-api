@@ -17,6 +17,12 @@ const checkAuth = (req, res, next) => {
   next();
 };
 
+app.get("/debug", (req, res) => {
+  res.json({
+    token: process.env.ADMIN_TOKEN || "undefined"
+  });
+});
+
 // Running API
 app.get("/", (req,res)=>{
   res.json({message: "Running API"})
