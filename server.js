@@ -51,12 +51,15 @@ app.get("/recipes/:id", (req,res)=>{
 });
 
 // データ追加
-app.post("/recipes", checkAuth, (req, res) => {
-  const newRecipe = req.body;
-
-  recipes.push(newRecipe);
-
-  res.status(201).json(newRecipe);
+// app.post("/recipes", checkAuth, (req, res) => {
+//   const newRecipe = req.body;
+//   recipes.push(newRecipe);
+//   res.status(201).json(newRecipe);
+// });
+// デバッグ用（ここに置き換える）
+app.post("/recipes", (req, res) => {
+  console.log("HEADERS:", req.headers);
+  res.json({ ok: true });
 });
 
 app.listen(PORT, () => {
