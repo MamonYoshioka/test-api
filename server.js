@@ -21,10 +21,12 @@ app.get("/debug", (req, res) => {
   res.json({
     token: process.env.ADMIN_TOKEN || "undefined"
   });
+
+  console.log("送信:", `[${req.headers.authorization}]`);
+  console.log("正解:", `[${process.env.ADMIN_TOKEN}]`);
 });
 
-console.log("送信:", `[${req.headers.authorization}]`);
-console.log("正解:", `[${process.env.ADMIN_TOKEN}]`);
+
 
 // Running API
 app.get("/", (req,res)=>{
