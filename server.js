@@ -17,10 +17,15 @@ const checkAuth = (req, res, next) => {
   next();
 };
 
+// Running API
+app.get("/", (req,res)=>{
+  res.json({message: "Running API"})
+});
+
 // 一覧API取得
 app.get("/recipes", (req,res)=>{
   res.json(recipes);
-})
+});
 
 // 詳細API取得
 app.get("/recipes/:id", (req,res)=>{
@@ -35,13 +40,13 @@ app.get("/recipes/:id", (req,res)=>{
 });
 
 // データ追加
-// app.post("/recipes", checkAuth, (req, res) => {
-//   const newRecipe = req.body;
+app.post("/recipes", checkAuth, (req, res) => {
+  const newRecipe = req.body;
 
-//   recipes.push(newRecipe);
+  recipes.push(newRecipe);
 
-//   res.status(201).json(newRecipe);
-// });
+  res.status(201).json(newRecipe);
+});
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
