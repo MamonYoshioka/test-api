@@ -1,6 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import recipes from "./data/recipes.js"
-
 const app = express();
 app.use(express.json());
 
@@ -44,6 +46,29 @@ app.post("/recipes", checkAuth, (req, res) => {
   const newRecipe = req.body;
   recipes.push(newRecipe);
   res.status(201).json(newRecipe);
+});
+
+// データの更新
+app.patch("/recipes/:id", (req, res) => {
+  // ID
+  const id = Number(req.params.id);
+  // 対象IDの検索
+  const recipe = recipes.find(r => r.id === id);
+
+  // 対象のIDデータがないときの処理
+  if(!recipe){
+    return res.status(404).json({message: "Not Found Update ID"});
+  }
+
+  // 更新処理(部分更新)
+  const { title, ingredients, image} = req.body;
+
+  if (title !== undefined) recipe.title = title;
+  if (ingredients !== undefined) recipe.ingredients = ingredients;
+  if (image !== undefined) recipe.image = image;
+
+  res.json(recipe);
+
 });
 
 
