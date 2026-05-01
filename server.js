@@ -17,17 +17,6 @@ const checkAuth = (req, res, next) => {
   next();
 };
 
-app.get("/debug", (req, res) => {
-  res.json({
-    token: process.env.ADMIN_TOKEN || "undefined"
-  });
-
-  console.log("送信:", `[${req.headers.authorization}]`);
-  console.log("正解:", `[${process.env.ADMIN_TOKEN}]`);
-});
-
-
-
 // Running API
 app.get("/", (req,res)=>{
   res.json({message: "Running API"})
@@ -51,16 +40,12 @@ app.get("/recipes/:id", (req,res)=>{
 });
 
 // データ追加
-// app.post("/recipes", checkAuth, (req, res) => {
-//   const newRecipe = req.body;
-//   recipes.push(newRecipe);
-//   res.status(201).json(newRecipe);
-// });
-// デバッグ用（ここに置き換える）
-app.post("/recipes", (req, res) => {
-  console.log("HEADERS:", req.headers);
-  res.json({ ok: true });
+app.post("/recipes", checkAuth, (req, res) => {
+  const newRecipe = req.body;
+  recipes.push(newRecipe);
+  res.status(201).json(newRecipe);
 });
+
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
