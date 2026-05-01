@@ -23,6 +23,9 @@ app.get("/debug", (req, res) => {
   });
 });
 
+console.log("送信:", `[${req.headers.authorization}]`);
+console.log("正解:", `[${process.env.ADMIN_TOKEN}]`);
+
 // Running API
 app.get("/", (req,res)=>{
   res.json({message: "Running API"})
