@@ -25,7 +25,7 @@ app.get("/recipes", (req,res)=>{
 // 詳細API取得
 app.get("/recipes/:id", (req,res)=>{
   const id = Number(req.params.id);
-  const recipe = recipes.find(r=>r.id === id);
+  const recipe = recipes.find(r => r.id === id);
 
   if(!recipe){
     return res.status(404).json({message: "Not Found ID"});
@@ -35,13 +35,13 @@ app.get("/recipes/:id", (req,res)=>{
 });
 
 // データ追加
-app.post("/recipes", checkAuth, (req, res) => {
-  const newRecipe = req.body;
+// app.post("/recipes", checkAuth, (req, res) => {
+//   const newRecipe = req.body;
 
-  recipes.push(newRecipe);
+//   recipes.push(newRecipe);
 
-  res.status(201).json(newRecipe);
-});
+//   res.status(201).json(newRecipe);
+// });
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
